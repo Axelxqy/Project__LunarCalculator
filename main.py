@@ -76,14 +76,14 @@ if 1 <= user_day <= 31:
     #Getting 基数
     if user_year >= 1900:
         if 1900 <= user_year <= 1999:
-            基数 = (last2_num + 3) * 5 + 55 + (last2_num - 1) // 4
+            ji_shu = (last2_num + 3) * 5 + 55 + (last2_num - 1) // 4
 
         elif 2000 <= user_year <= 2099:
-            基数 = (last2_num + 7) * 5 + 15 + (last2_num + 19) // 4
+            ji_shu = (last2_num + 7) * 5 + 15 + (last2_num + 19) // 4
 
     #Simplifing 基数
-    if 基数 > 60:
-        基数 = 基数 - 60
+    if ji_shu > 60:
+        ji_shu = ji_shu - 60
 
     #Calculating total days
     year_start = user_year   
@@ -96,7 +96,7 @@ if 1 <= user_day <= 31:
     total_days = calculate_total_days(year_start, month_start, day_start, year_end, month_end, day_end)
 
 #Preparing lunar_day for 天天干 and 天地支
-    lunar_day = 基数 + total_days
+    lunar_day = ji_shu + total_days
     while lunar_day > 60:
         if lunar_day > 60:
             lunar_day = lunar_day - 60

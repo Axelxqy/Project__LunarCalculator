@@ -18,7 +18,7 @@ def calculate_lunar_year():
     TG_list = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
     DZ_Ylist = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
     if user_year >= 1900:
-        print("Year Input Accepted!\n")
+        print("Year Input Accepted!")
         #Use Modulo (%) to get remainder of the number  
         TG_year = (user_year - 3) % 10
         DZ_year = (user_year - 3) % 12
@@ -36,9 +36,11 @@ def calculate_lunar_year():
         else:
             Y_DZ = DZ_Ylist[-1]
 
-        print("Your lunar year is" + " " + Y_TG + Y_DZ + "年")        
+        print("Your lunar year is" + " " + Y_TG + Y_DZ + "年" + "\n")        
     else:
         print("Invalid Year Input!\n")
+    
+    return Y_TG, Y_DZ
  
 def calculate_lunar_month():
     global M_TG, M_DZ
@@ -47,7 +49,7 @@ def calculate_lunar_month():
     DZ_Mlist = ["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"]
 
     if 1 <= user_month <= 12 :
-        print("Month Input Accepted!\n")
+        print("Month Input Accepted!")
         lunar_month = ((TG_year * 2) + user_month) % 10
         if lunar_month != 0:
             Mnum_TG = lunar_month - 2
@@ -58,18 +60,20 @@ def calculate_lunar_month():
         Mnum_DZ = user_month - 2
         M_DZ = DZ_Mlist[Mnum_DZ]
 
-        print("Your lunar month is" + " " + M_TG + M_DZ + "月")  
+        print("Your lunar month is" + " " + M_TG + M_DZ + "月" + "\n")  
     else:
         print("Invalid Month Input!\n")
 
-def calculatr_lunar_date():
+    return M_TG, M_DZ
+
+def calculate_lunar_date():
     global D_TG, D_DZ
     #Birth Date Part
     #Figuring the year groups
     TG_list = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
     DZ_Ylist = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
     if 1 <= user_day <= 31:
-        print("Date Input Accepted!\n")
+        print("Date Input Accepted!")
         last2_num = user_year % 100
 
         #Getting 基数
@@ -114,9 +118,11 @@ def calculatr_lunar_date():
         else:
             D_DZ = DZ_Ylist[-1]
 
-        print("Your lunar date is" + " " + D_TG + D_DZ + "天")  
+        print("Your lunar date is" + " " + D_TG + D_DZ + "日" + "\n")  
     else:
         print("Invalid Date Input!\n")
+
+    return D_TG, D_DZ
 
 def calculate_lunar_time():
     global T_TG, T_DZ
@@ -124,7 +130,7 @@ def calculate_lunar_time():
     TG_list = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
     DZ_Ylist = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
     if 0 <= user_time <= 23:
-        print("Time Input Accepted!\n")
+        print("Time Input Accepted!")
 
         if user_time == 23 or user_time == 0:
             T_DZ = DZ_Ylist[0]
@@ -165,18 +171,30 @@ def calculate_lunar_time():
         else:
             T_TG = TG_list[-1] 
 
-        print("Your lunar time is" + " " + T_TG + T_DZ + "时")
+        print("Your lunar time is" + " " + T_TG + T_DZ + "时" + "\n")
     else:
         print("Invalid Time Input!\n")
 
+    return T_TG, T_DZ
 
-
+#Main Program
 def mainCalc():
     global user_year, user_month, user_day, user_time
     user_year = int(input("Please enter your Birth Year (Year 1900 and above): "))
     user_month = int(input("Please enter your birth month (Month 1-12): "))
     user_day = int(input("Please enter your birth date (Day 1-31): "))
     user_time = int(input("Please enter your birth time (0-23): "))
-    print("")        
-    print("Your 八字 is" + " " + Y_TG + Y_DZ + "年" + " " + M_TG + M_DZ + "月" + " " + D_TG + D_DZ + "天"
+    print("Checking...\n")
+
+    Y_TG, Y_DZ = calculate_lunar_year()
+    M_TG, M_DZ = calculate_lunar_month()
+    D_TG, D_DZ = calculate_lunar_date()
+    T_TG, T_DZ = calculate_lunar_time()
+
+    print("Your 八字 is" + " " + Y_TG + Y_DZ + "年" + " " + M_TG + M_DZ + "月" + " " + D_TG + D_DZ + "日"
         + " " + T_TG + T_DZ + "时")
+
+#Running the program
+if __name__ == "__main__":
+    mainCalc()
+
